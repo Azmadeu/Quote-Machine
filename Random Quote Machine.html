@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Random Quote Machine</title>
+    <head>
+        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script>
+            function getQuote (){
+                $.ajax({
+                    url: 'https://talaikis.com/api/quotes/random/'
+                }).done(function (data) {
+                    var author = data.author;
+                    var quote = data.quote;
+                   $('#author').html("- "+ author);
+                   $('#quote').html("\""+ quote +"\"");
+                   $("#tweet").attr("href", "https://twitter.com/intent/tweet?hashtags=Serge&related=freecodecamp&text="+quote+" -"+author+" ");
+                })
+            }
+            window.onload = function() {
+                var button = $('#change-color')[0];
+                var items = $('.color');
+                var colors = ['#16a085', '#27ae60', '#2c3e50', '#f39c12', '#e74c3c', '#9b59b6', '#FB6964', '#342224', "#472E32", "#BDBB99", "#77B1A9", "#73A857"];
+                var body = $('body')[0];
+                button.onclick = function () {
+                    getQuote();
+                    var color = colors[Math.floor(Math.random() * colors.length - 1)];
+                    body.style.backgroundColor = color;
+                    for (var j = 0; j < items.length; j++) {
+                        if (items[j].tagName === 'H1' || items[j].tagName === 'H2') {
+                            items[j].style.color = color;
+                        } else {
+                            items[j].style.backgroundColor = color;
+                        }
+                    }
+                }
+            }
+        </script>
+    </head>
+<body style="background-color: deepskyblue">
+<style>
+
+    h1 {
+        font-family: fantasy;
+        color: deepskyblue;
+        display:flex;
+        justify-content: center;
+        font-size: 25px;
+        font-weight: 100;
+    }
+
+    h2 {
+        font-size:20px;
+        font-weight:100;
+
+    }
+
+      a{
+          height:25px;
+      }
+
+    .border {
+        border:none;
+        border-radius:3px;
+        color:white;
+        font-size:0.85em;
+        padding: 8px 18px 6px 18px;
+        margin-top:30px;
+        opacity:1;
+        cursor:pointer;
+        background-color: deepskyblue;
+    }
+
+    .border:hover {
+         opacity:0.9;
+    }
+
+    .container li {
+        text-decoration: none;
+        list-style-type: none;
+        display:inline;
+    }
+
+    .container {
+        border-radius: 3px;
+        position: relative;
+        margin: 12% auto auto auto;
+        width: 450px;
+        padding: 60px 40px;
+        display: table;
+        background-color: white;
+    }
+
+    .left{
+        float:left;
+        margin-right:5px;
+    }
+
+    .right{
+        float:right;
+    }
+
+    button{
+        font-weight: 600;
+        height:38px;
+    }
+
+    p{
+        display:flex;
+        justify-content: center;
+        color: white;
+        font-size: 14px;
+        font-weight:600;
+    }
+
+</style>
+<div class="container">
+<div>
+        <h1 class="color" id="quote">
+            Click to get a random quote.
+        </h1>
+    <h2 align="right" class="color" id="author"></h2>
+</div>
+    <div>
+        <ul>
+            <li><a href="http://" target="_blank" class="border left color" id="tweet"><img src="http://mattersofgrey.com/wp-content/uploads/2010/11/white_twitter.png" width="22" height="22"></a></li>
+            <li><a href="#" class="border left color"><img src="http://www.pvhc.net/img163/ucduefsnwclxgntvwrwc.gif" width="22" height="22"></a></li>
+            <li><button class="border right color" id="change-color">New Quote</button></li>
+        </ul>
+    </div>
+</div>
+<p>by Serge Makarov</p>
+</body>
+</html>
