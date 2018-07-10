@@ -1,12 +1,12 @@
 function getQuote (){
     $.ajax({
-        url: 'http://talaikis.com/api/quotes/random/'
+        url: 'https://talaikis.com/api/quotes/random/'
     }).done(function (data) {
         var author = data.author;
         var quote = data.quote;
         $('#author').html("- "+ author);
         $('#quote').html("\""+ quote +"\"");
-        $("#tweet").attr("href", "http://twitter.com/intent/tweet?hashtags=Serge&related=freecodecamp&text="+quote+" -"+author+" ");
+        $("#tweet").attr("href", "https://twitter.com/intent/tweet?hashtags=Serge&related=freecodecamp&text="+quote+" -"+author+" ");
     })
 }
 
